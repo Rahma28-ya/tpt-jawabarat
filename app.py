@@ -620,7 +620,7 @@ elif menu == "Prediksi TPT":
             with colp2:
                 ipm = st.slider(FEATURE_LABEL["IPM"], 50.0, 90.0, 72.0, 0.1)
                 pdrb = st.number_input(FEATURE_LABEL["PDRB"], min_value=0, value=5_000_000, step=10_000)
-            submit = st.form_submit_button("🔮 Prediksi TPT", use_container_width=True)
+            submit = st.form_submit_button(" Prediksi TPT", use_container_width=True)
 
         if submit:
             hasil = predict_tpt(full_models, jumlah_penduduk, tpak, ipm, pdrb)
