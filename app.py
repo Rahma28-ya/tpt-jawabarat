@@ -38,8 +38,8 @@ FEATURE_LABEL = {
     "IPM": "IPM - Indeks Pembangunan Manusia",
     "PDRB": "PDRB (juta rupiah)",
 }
-SKENARIO_LIST = ["80_20", "70_30", "60_40"]
-SKENARIO_LABEL = {"80_20": "80/20", "70_30": "70/30", "60_40": "60/40"}
+SKENARIO_LIST = ["80_20"]
+SKENARIO_LABEL = {"80_20": "80/20"}
 
 # PALET WARNA: PINK PASTEL, UNGU PASTEL, BIRU
 C_PINK = "#FF8FB1"
@@ -351,7 +351,7 @@ if menu == "Beranda":
     st.write("")
     col_a, col_b = st.columns(2)
     with col_a:
-        st.markdown("##### 🏆 5 TPT Tertinggi")
+        st.markdown("#####  5 TPT Tertinggi")
         top5 = df_tahun.sort_values("TPT", ascending=False).head(5)
         fig = px.bar(
             top5, x="TPT", y="Kabupaten_Kota", orientation="h",
@@ -365,7 +365,7 @@ if menu == "Beranda":
         )
         st.plotly_chart(fig, use_container_width=True)
     with col_b:
-        st.markdown("##### 🌿 5 TPT Terendah")
+        st.markdown("#####  5 TPT Terendah")
         bot5 = df_tahun.sort_values("TPT", ascending=True).head(5)
         fig2 = px.bar(
             bot5, x="TPT", y="Kabupaten_Kota", orientation="h",
@@ -470,7 +470,7 @@ elif menu == "Tren Provinsi":
         )
 
     st.write("")
-    st.markdown("##### 🏙️ Tren TPT per Kabupaten/Kota (pilih wilayah)")
+    st.markdown("#####  Tren TPT per Kabupaten/Kota (pilih wilayah)")
     avg_per_wilayah = df_all.groupby("Kabupaten_Kota")["TPT"].mean().sort_values(ascending=False)
     default_wilayah = [avg_per_wilayah.index[0], avg_per_wilayah.index[-1]]
     wilayah_pilih = st.multiselect(
@@ -580,11 +580,11 @@ elif menu == "Evaluasi Model":
 
     best = df_eval.loc[df_eval["R2"].idxmax()]
     st.success(
-        f"🏆 **Skenario terbaik:** Random Forest Regressor — Skenario {best['Skenario']} "
+        f" **Skenario terbaik:** Random Forest Regressor — Skenario {best['Skenario']} "
         f"(MAE={best['MAE']:.4f}, RMSE={best['RMSE']:.4f}, R²={best['R2']:.4f})"
     )
 
-    st.markdown("##### 🌲 Feature Importance — Random Forest (per skenario)")
+    st.markdown("#####  Feature Importance — Random Forest (per skenario)")
     skenario_imp = st.selectbox("Skenario:", [SKENARIO_LABEL[s] for s in SKENARIO_LIST], key="imp_skenario")
     imp_dict = detail_pred[skenario_imp].attrs.get("rf_importance", {})
     if imp_dict:
@@ -600,8 +600,8 @@ elif menu == "Evaluasi Model":
 
 # HALAMAN: PREDIKSI TPT (FAKTOR YANG MEMPENGARUHI + TPT 2026)
 elif menu == "Prediksi TPT":
-    st.markdown("## 🔮 Prediksi TPT Berdasarkan Faktor Pengaruh")
-    tab1, tab2 = st.tabs(["🧮 Prediksi Manual (Input Faktor)", "📅 Proyeksi TPT 2026 (Seluruh Wilayah)"])
+    st.markdown("##  Prediksi TPT Berdasarkan Faktor Pengaruh")
+    tab1, tab2 = st.tabs([" Prediksi Manual (Input Faktor)", " Proyeksi TPT 2026 (Seluruh Wilayah)"])
 
     # ---------- TAB 1: PREDIKSI MANUAL ----------
     with tab1:
