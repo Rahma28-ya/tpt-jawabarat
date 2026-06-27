@@ -273,7 +273,7 @@ if menu == "Beranda":
     st.write("")
     col_a, col_b = st.columns(2)
     with col_a:
-        st.markdown("##### 🏆 5 TPT Tertinggi")
+        st.markdown("#####  5 TPT Tertinggi")
         top5 = df_tahun.sort_values("TPT", ascending=False).head(5)
         fig  = px.bar(top5, x="TPT", y="Kabupaten_Kota", orientation="h",
                       color="TPT", color_continuous_scale=SEQ_COLORSCALE, text="TPT")
@@ -284,7 +284,7 @@ if menu == "Beranda":
                           margin=dict(l=0,r=10,t=10,b=0))
         st.plotly_chart(fig, use_container_width=True)
     with col_b:
-        st.markdown("##### 🌿 5 TPT Terendah")
+        st.markdown("#####  5 TPT Terendah")
         bot5 = df_tahun.sort_values("TPT", ascending=True).head(5)
         fig2 = px.bar(bot5, x="TPT", y="Kabupaten_Kota", orientation="h",
                       color="TPT", color_continuous_scale=SEQ_COLORSCALE, text="TPT")
@@ -389,7 +389,7 @@ elif menu == "Tren Provinsi":
 
 # ── HALAMAN: AKTUAL VS PREDIKSI ──────────────────────────────────────────────
 elif menu == "Aktual vs Prediksi":
-    st.markdown("## 🎯 Data Aktual vs Prediksi")
+    st.markdown("##  Data Aktual vs Prediksi")
     st.caption(
         f"Nilai TPT aktual vs prediksi Random Forest pada data uji — "
         f"skenario **{SKENARIO_LABEL}** (test set 20%)."
@@ -470,7 +470,7 @@ elif menu == "Evaluasi Model":
     )
 
     # Feature importance
-    st.markdown("##### 🌲 Feature Importance — Random Forest")
+    st.markdown("#####  Feature Importance — Random Forest")
     imp_dict = df_pred.attrs.get("rf_importance", {})
     if imp_dict:
         df_imp = pd.DataFrame({"Fitur": list(imp_dict.keys()),
@@ -486,9 +486,9 @@ elif menu == "Evaluasi Model":
 
 # ── HALAMAN: PREDIKSI TPT ────────────────────────────────────────────────────
 elif menu == "Prediksi TPT":
-    st.markdown("## 🔮 Prediksi TPT Berdasarkan Faktor Pengaruh")
-    tab1, tab2 = st.tabs(["🧮 Prediksi Manual (Input Faktor)",
-                           "📅 Proyeksi TPT 2026 (Seluruh Wilayah)"])
+    st.markdown("##  Prediksi TPT Berdasarkan Faktor Pengaruh")
+    tab1, tab2 = st.tabs([" Prediksi Manual (Input Faktor)",
+                           " Proyeksi TPT 2026 (Seluruh Wilayah)"])
 
     with tab1:
         st.caption("Masukkan nilai faktor untuk melihat estimasi TPT menggunakan Random Forest Regressor.")
@@ -501,7 +501,7 @@ elif menu == "Prediksi TPT":
             with colp2:
                 ipm  = st.slider(FEATURE_LABEL["IPM"],  50.0, 90.0, 72.0, 0.1)
                 pdrb = st.number_input(FEATURE_LABEL["PDRB"], min_value=0, value=5_000_000, step=10_000)
-            submit = st.form_submit_button("🔮 Prediksi TPT", use_container_width=True)
+            submit = st.form_submit_button(" Prediksi TPT", use_container_width=True)
 
         if submit:
             hasil = predict_tpt(full_models, jumlah_penduduk, tpak, ipm, pdrb)
@@ -514,7 +514,7 @@ elif menu == "Prediksi TPT":
             if hasil >= df_all["TPT"].quantile(0.75):
                 st.warning("⚠️ Estimasi TPT tergolong **tinggi** dibanding rata-rata historis Jawa Barat.")
             elif hasil <= df_all["TPT"].quantile(0.25):
-                st.success("✅ Estimasi TPT tergolong **rendah** dibanding rata-rata historis Jawa Barat.")
+                st.success(" Estimasi TPT tergolong **rendah** dibanding rata-rata historis Jawa Barat.")
             else:
                 st.info("ℹ️ Estimasi TPT berada pada kisaran **menengah** dibanding rata-rata historis.")
 
@@ -523,7 +523,7 @@ elif menu == "Prediksi TPT":
             "Faktor tiap kabupaten/kota diproyeksikan dengan ekstrapolasi tren linear 2018–2025, "
             "lalu TPT diprediksi menggunakan Random Forest yang dilatih pada seluruh data historis."
         )
-        if st.button("🚀 Hitung Proyeksi TPT 2026 — Seluruh Kab/Kota", use_container_width=True):
+        if st.button(" Hitung Proyeksi TPT 2026 — Seluruh Kab/Kota", use_container_width=True):
             rows = []
             for kab, grp in df_all.groupby("Kabupaten_Kota"):
                 grp  = grp.sort_values("Tahun")
